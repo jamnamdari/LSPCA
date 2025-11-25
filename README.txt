@@ -53,7 +53,6 @@ library(astsa)
 library(waveslim)
 library(LSPCA)
 library(dplR)
-
 ```
 
 ### Example
