@@ -2,4 +2,5 @@
 HC <- load("data-raw/HC.rda")
 FEP <- load("data-raw/FEP.rda")
 D <- load("data-raw/simulated_data.rda")
-usethis::use_data(HC, FEP, D, overwrite = TRUE)
+f_D <- load("data-raw/Spectral_density_simulated_data.rda")
+usethis::use_data(HC, FEP, D, f_D, overwrite = TRUE)
