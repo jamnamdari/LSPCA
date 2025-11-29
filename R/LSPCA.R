@@ -53,11 +53,44 @@ SOAP_fun <- function(Sigma_hat,U0,s,n_iter){
 }
 
 
-LSPCA <- function(n,p, f_xx, d, lambda, lr = 0.02, maxiter = 60,
-                  control = list(fan_maxinc = 10, verbose = 0), eta, s, n_iter, nu){
-  LSPCA0(n,p, f_xx, Pi = matrix(0, nrow = 2*p, ncol=2*p), d, lambda, lr = 0.02, maxiter = 60,
-   control = list(fan_maxinc = 10, verbose = 0), eta, s, n_iter, nu)
+LSPCA.f <- function(n,p, f_xx, d, eta, s, n_iter, theta){
+  LSPCA0(n,p, f_xx, Pi = matrix(0, nrow = 2*p, ncol=2*p), d, lambda = 0.5 * sqrt(log(p) / n), lr = 0.02, maxiter = 60,
+   control = list(fan_maxinc = 10, verbose = 0), eta, s, n_iter, nu=theta)
 }
+
+
+LSPCA <- function(X, d, eta, s, n_iter, theta, ntp = 10){
+
+  p <- ncol(X)
+  n <- nrow(X)
+
+  ## Multitaper estimate of the spectral density matrix
+  U <- sine.taper(n,ntp)
+  X_tp <- apply(U, MARGIN = 2, function(u) u*X, simplify = FALSE)
+  F_tp_list <- lapply(X_tp, FUN = function(Y) mvspec(Y,plot = FALSE) )
+
+  len_freq <- n/2
+  F_tp1 <- array(0, c(p, p, len_freq))
+  for (ell in 1:len_freq) {
+    for(j in 1:length(F_tp_list)){
+      F_tp1[,,ell] <- F_tp1[,,ell] + F_tp_list[[j]]$fxx[,,ell]
+    }
+    F_tp1[,,ell] <- F_tp1[,,ell]/length(F_tp_list)
+  }
+  #plot(Re(F_tp1[1,1,])*(n), type = "l", ylab = " ", main = "Estimated spectral densities for the first ralization", ylim=c(1,400))
+  #for(a in 2:p){
+  #  lines(Re(F_tp1[a,a,])*n, col= a)
+  #}
+  f_xx <- F_tp1*n
+  rm(U)
+  rm(X_tp)
+  rm(F_tp_list)
+  gc()
+
+  LSPCA0(n,p, f_xx, Pi = matrix(0, nrow = 2*p, ncol=2*p), d, lambda = 0.5 * sqrt(log(p) / n), lr = 0.02, maxiter = 60,
+         control = list(fan_maxinc = 10, verbose = 0), eta, s, n_iter, nu=theta)
+}
+
 
 LSPCA0 <- function(n,p, f_xx, Pi, d, lambda, lr = 0.02, maxiter = 60,
                   control = list(fan_maxinc = 10, verbose = 0), eta, s, n_iter, nu){
@@ -218,7 +251,7 @@ LSDPC_ADMM_SOAP_PD_fun <- function(n,p, f_xx, Pi, d, lambda, lr = 0.02, maxiter 
   #LSDPCA_Im <- freq_selector*Im(fxx_grad_evec[,-1])
 
 
-  return(list(Evec_series_1 = fxx_grad_evec[,-1], LSDPCA, best_sol, f_deflated = g_xx))
+  return(list(Evec_series_1 = fxx_grad_evec[,-1], LSDPCA, selected_freqs = best_sol, f_deflated = g_xx))
 }
 
 selector <- function(fxx_grad_evec, f_xx, len_freq ,eta,p){
@@ -557,7 +590,7 @@ LSDPC_ADMM_SOAP_PD2_fun <- function(n,p, f_xx, Pi, d, lambda, lr = 0.02, maxiter
 
 
 
-  return(list(Evec_series_1 = fxx_grad_evec[,-1], Evec_series_2 = fxx_grad_evec_2[,-1], LSDPCA, best_sol ))
+  return(list(Evec_series_1 = fxx_grad_evec[,-1], Evec_series_2 = fxx_grad_evec_2[,-1], LSDPCA, selected_freqs = best_sol ))
 }
 
 

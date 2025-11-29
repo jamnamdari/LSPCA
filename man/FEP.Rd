@@ -36,40 +36,9 @@ library(gradfps)
 library(lpSolve)
 
 
-## Data
-
-X <- FEP
-p <- ncol(X)
-n <- nrow(X)
-
-
-## Multitaper estimate of the spectral density matrix
-U <- sine.taper(n,10)
-X_tp <- apply(U, MARGIN = 2, function(u) u*X, simplify = FALSE)
-F_tp_list <- lapply(X_tp, FUN = function(Y) mvspec(Y,plot = FALSE) )
-
-len_freq <- n/2
-F_tp1 <- array(0, c(p, p, len_freq))
-for (ell in 1:len_freq) {
-  for(j in 1:length(F_tp_list)){
-    F_tp1[,,ell] <- F_tp1[,,ell] + F_tp_list[[j]]$fxx[,,ell]
-  }
-  F_tp1[,,ell] <- F_tp1[,,ell]/length(F_tp_list)
-}
-plot(Re(F_tp1[1,1,])*(n), type = "l", ylab = " ", main = "Estimated spectral densities for the first ralization", ylim=c(1,400))
-for(a in 2:p){
-  lines(Re(F_tp1[a,a,])*n, col= a)
-}
-f_xx1 <- F_tp1*n
-rm(U)
-rm(X_tp)
-rm(F_tp_list)
-gc()
-
 ## Localized and sparse PCA
-LSDPCA_ADMM_SOAP_Ex2 <- LSPCA(n,p, f_xx1, lambda = 0.5 * sqrt(log(p) / n), d=2, lr = 0.02, maxiter = 60,
-                                               control = list(fan_maxinc = 10, verbose = 0), eta=41, s=8, n_iter = 20, nu=0.2)
 
+LSPCA_FEP <- LSPCA(FEP, d=2, eta=41, s=8, n_iter = 20, theta=0.2)
 
 
 ## Plot
@@ -82,9 +51,9 @@ bar_height = 10/2
 font_size = 20/2
 
 
-
-Localized_Est <- selector(LSDPCA_ADMM_SOAP_Ex2[[1]],f_xx1,n/2,41,p)
-evecs <- t(Mod(Localized_Est[[1]]))
+freq_s <- LSPCA_FEP$selected_freqs
+freq_selector <- matrix(rep(freq_s, p), nrow = p, byrow = TRUE)
+evecs <- t(freq_selector*Mod(LSPCA_FEP$Evec_series_1))
 v = as.matrix(evecs)
 lo = min(v)
 hi = max(v)
@@ -112,7 +81,6 @@ ggplot(gdat, aes(x = x, y = y, fill = z)) + geom_tile() +
   #geom_vline(xintercept = 8*2, linetype="dotted", color = "red", size=.25)+
   geom_vline(xintercept = 64*2, linetype="dotted", color = "red", size=.25)+
   geom_vline(xintercept = 112*2, linetype="dotted", color = "red", size=.25)
-
 
 
 }
