@@ -19,7 +19,7 @@ library(dplR)
 
 ## Time Domain
 
-The R-code provided below generates the dataframe D in the R package. Detailed description of the process is provided in the manuscript. 
+The R-code provided below generates the dataframe `D` in the R package. Detailed description of the process is provided in the manuscript. 
 
 
 ```r
