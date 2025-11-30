@@ -279,7 +279,7 @@ ggplot(gdat, aes(x = x, y = y, fill = z)) + geom_tile() +
 
 ### Using the function LSPCA.f
 
-The `LSPCA.f` function estimates the localized and sparse principal components of a multivariate time series in the frequency domain. Users can pass the frequency transformation of the data, i.e. an estimate of the spectral density matrices, to the function. The R code privided in the <a href="./Help_files/Data_Generation.md">data generation file</a> detials how to estimate the spectral denisyt matrices by the multitaper estimation method. Arguments of the function are as follows.
+The `LSPCA.f` function estimates the localized and sparse principal components of a multivariate time series in the frequency domain. Users can pass the frequency transformation of the data, i.e. an estimate of the spectral density matrices, to the function. The R code privided in the <a href="./Help_files/Data_Generation.md">data generation file</a> produces and estimate of the spectral denisyt matrices by means of the multitaper estimation method. Arguments of the `LSPCA.f` function are as follows.
 
 + p: is the dimension of the time series.
 + n: is the length of the time series.
