@@ -1,6 +1,6 @@
-# LSPCA
+# lspca
 
-`LSPCA` is an R-package that provides an implementation of the localized and sparse principal components of multivariate time series in the frequency domain. The algorithm is based on the paper
+`lspca` is an R-package that provides an implementation of the localized and sparse principal components of multivariate time series in the frequency domain. The algorithm is based on the paper
 [Localized Sparse Principal Component Analysis in Frequency Domain](https://arxiv.org/abs/2408.08177#)
 by Jamshid Namdari, Amita Manatunga,Fabio Ferrarelli, and Robert Krafty. 
 
@@ -8,11 +8,7 @@ In order to perform the localized and sparse principal component analysis in the
 
 ## Installation
 
-### Mac users
-In structionson how to run the LSPCA package for mac users are provided in <a href="./Help_files/Mac_Users_Instructions.md">mac users instruction</a> file.
-
-### Windows users
-The `LSPCA` can be installed dirrectly from GitHub by running the following code in R. If this method does not work on your computer, you can run the LSPCA on Docker Desctop. Instructions are provided in in <a href="./Help_files/Windows_Users_Instructions.md">windows users instruction</a> file.
+The `lspca` can be installed dirrectly from GitHub by running the following code in R.
 
 ```r
 library(devtools)
@@ -26,13 +22,13 @@ The `LSPCA()` function requires the user to install and call the following libra
 + library(ggplot2)
 + library(RSpectra)
 + library(lpSolve)
-+ library(gradfps)
++ library(fps)
 
-Note that `gradfps` is not available on CRAN and can be installed from their authors` guithub page.
+Note that `fps` is not available on CRAN and can be installed from their authors` guithub page.
 
 ```r
 library(devtools)
-install_github("yixuan/gradfps")
+install_github("fps", "vqv")
 ```
 The other libraries are aveilabe on CRAN and can be installed by calling `install.packages("name_of_the_package")`.
 
