@@ -93,8 +93,9 @@ Jamshid Namdari
   ##################################################
   ## Estimate of 1-dimensional principal subspaces
   ##################################################
-
-LSDPCA_Ex1 <- LSPCA.f(n,p,f_D, d=1, eta=(2/5)*512, s=5, n_iter = 20, theta=0.6)
+  p <- ncol(D)
+  n <- nrow(D)
+  LSDPCA_Ex1 <- LSPCA.f(n,p,f_D, d=1, eta=(2/5)*512+10, s=5, n_iter = 20, theta=0.6)
 
 
 

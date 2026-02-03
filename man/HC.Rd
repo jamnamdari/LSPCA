@@ -46,6 +46,8 @@ legend_title = ""
 asp = .5 #0.2
 bar_height = 10/2
 font_size = 20/2
+p <- ncol(FEP)
+n <- nrow(FEP)
 
 
 freq_s <- LSPCA_HC$selected_freqs

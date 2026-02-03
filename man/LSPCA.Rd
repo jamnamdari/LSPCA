@@ -79,6 +79,7 @@
   library(dplR)
   library(waveslim)
   library(astsa)
+  library(ggplot2)
 
   ##########################################################################################
   ## Example 1 : This example reproduces bottom right panel of Figure 2 in the manuscript
@@ -88,7 +89,7 @@
   ##################################################
   ## Estimate of 1-dimensional principal subspaces
   ##################################################
-  LSDPCA_ADMM_SOAP_Ex1 <- LSPCA(X, d=1, eta=(2/5)*512, s=5, n_iter = 20, theta=0.6, ntp=20)
+  LSDPCA_ADMM_SOAP_Ex1 <- LSPCA(D, d=1, eta=(2/5)*512+10, s=5, n_iter = 20, theta=0.6, ntp=20)
 
 
 
@@ -105,7 +106,8 @@
   asp = .5 #0.2
   bar_height = 10/2
   font_size = 20/2
-
+  p <- ncol(D)
+  n <- nrow(D)
 
 
   freq_s <- LSDPCA_ADMM_SOAP_Ex1$selected_freqs
