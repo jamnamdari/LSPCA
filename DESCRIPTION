@@ -1,15 +1,15 @@
-Package: LSPCA
+Package: lspca
 Type: Package
 Title: Localized Sparse Principal Component Analysis 
 Version: 0.1.0
 Author: Jamshid Namdari
-Maintainer: The package maintainer <jamshid.namdari@emory.edu>
+Maintainer: Jamshid Namdari <jamshid.namdari@emory.edu>
 Description: It computes localized and sparse principal component loadings of spectral density matrix of stationary time series
 License: MIT
 Encoding: UTF-8
 LazyData: true
 Depends: 
     R (>= 2.10)
-Imports: RSpectra, gradfps, lpSolve
-Remotes: github::yixuan/gradfps
+Imports: RSpectra, fps, lpSolve
+Remotes: github::vqv/fps
 devtools::load_all() 
