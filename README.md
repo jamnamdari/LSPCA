@@ -12,7 +12,8 @@ The `lspca` can be installed dirrectly from GitHub by running the following code
 
 ```r
 library(devtools)
-install_github("jamnamdari/LSPCA")
+library(remotes)
+remotes::install_github("jamnamdari/LSPCA@Windows-only")
 ```
 
 The `LSPCA()` function requires the user to install and call the following libraries
@@ -106,7 +107,8 @@ asp = .5 #0.2
 bar_height = 10/2
 font_size = 20/2
 
-
+p <- ncol(D)
+n <- nrow(D)
 
 Localized_Est <- selector(Ex1[[1]],f_D,n/2,(2/5)*512,p)
 evecs <- t(Mod(Localized_Est[[1]]))
@@ -159,7 +161,8 @@ asp = .5 #0.2
 bar_height = 10/2
 font_size = 20/2
 
-
+p <- ncol(D)
+n <- nrow(D)
 
 Localized_Est <- selector(Ex2[[1]],f_D,n/2,(2/5)*512,p)
 evecs <- t(Mod(Localized_Est[[1]]))
@@ -293,6 +296,8 @@ The `LSPCA.f` function estimates the localized and sparse principal components o
 ## Estimate of 1-dimensional principal subspaces
 ##################################################
 nu_v <- c(0,.2,.4,.6,.8,1)
+p <- ncol(D)
+n <- nrow(D)
 
 ## Without smoothing
 Ex3 <- LSPCA.f(n,p,f_D, d=1, eta=(2/5)*512, s=5, n_iter = 20, theta=0)
