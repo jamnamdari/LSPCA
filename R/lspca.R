@@ -63,6 +63,8 @@ LSPCA.f <- function(n,p, f_xx, d, eta, s, n_iter, theta){
 
 
 LSPCA <- function(X, d, eta, s, n_iter, theta, ntp = 10){
+  library(astsa)
+  library(waveslim)
 
   p <- ncol(X)
   n <- nrow(X)
@@ -140,6 +142,9 @@ sparse_par_selector <- function(X, eta, nu=0, d){
 LSDPC_fps_SOAP_PD_fun <- function(n,p, f_xx, Pi, d, lambda, lr = 0.02, maxiter = 60,
                                   control = list(fan_maxinc = 10, verbose = 0), eta, s, n_iter, nu) {
 
+  library(fps)  # The modified version
+  library(RSpectra)
+  library(lpSolve)
 
   len_freq <- n/2
 
@@ -172,7 +177,7 @@ LSDPC_fps_SOAP_PD_fun <- function(n,p, f_xx, Pi, d, lambda, lr = 0.02, maxiter =
         Im_H <- fxx_grad_ell$projection[1:p,(p+1):(2*p)]
         H <- Re_H + Im_H*1i
         gc()
-        }, error=function(e){cat("ERROR :",conditionMessage(e), "\n")}
+        }, error=function(e){cat("")}
         )
       } else { }
     } else { }
@@ -254,7 +259,7 @@ LSDPC_fps_SOAP_PD_fun <- function(n,p, f_xx, Pi, d, lambda, lr = 0.02, maxiter =
 
 
 selector <- function(fxx_grad_evec, f_xx, len_freq ,eta,p){
-
+  library(lpSolve)
   ## optimization step
   # Coefficients of the linear objective function
   C <- sapply(1:len_freq, function(ell) Re(t(Conj(fxx_grad_evec[,ell]))%*%f_xx[,,ell]%*%fxx_grad_evec[,ell]))
@@ -292,7 +297,10 @@ selector <- function(fxx_grad_evec, f_xx, len_freq ,eta,p){
 
 ## Frequency parameter selection
 Freq_par_selector1 <- function(X, f_xx1 = NULL, fxx_evec_s){
-  n <- nrow(X)
+  library(astsa)
+  library(waveslim)
+
+   n <- nrow(X)
   p <- ncol(X)
 
   if(is.null(f_xx1)){
@@ -380,6 +388,8 @@ Freq_par_selector1 <- function(X, f_xx1 = NULL, fxx_evec_s){
 
 ## Sparsity parameter selection
 sparse_par_selector1 <- function(X, eta, nu=0){
+  library(astsa)
+  library(waveslim)
   ### sparsity selection second round
   n <- nrow(X)
 
@@ -479,6 +489,11 @@ sparse_par_selector1 <- function(X, eta, nu=0){
 
 LSDPC_fps_SOAP_PD2_fun <- function(n,p, f_xx, Pi, d, lambda, lr = 0.02, maxiter = 60,
                                    control = list(fan_maxinc = 10, verbose = 0), eta, s, n_iter, nu) {
+
+  library(fps)  # The modified version
+  library(RSpectra)
+  library(lpSolve)
+
   len_freq <- n/2
 
   S <- array(0, c(p*2, p*2, len_freq))
@@ -511,7 +526,7 @@ LSDPC_fps_SOAP_PD2_fun <- function(n,p, f_xx, Pi, d, lambda, lr = 0.02, maxiter 
         Im_H <- fxx_grad_ell$projection[1:p,(p+1):(2*p)]
         H <- Re_H + Im_H*1i
         gc()
-        }, error=function(e){cat("ERROR :",conditionMessage(e), "\n")}
+        }, error=function(e){cat("")}
         )
       } else { }
     } else { }
@@ -598,6 +613,9 @@ LSDPC_fps_SOAP_PD2_fun <- function(n,p, f_xx, Pi, d, lambda, lr = 0.02, maxiter 
 
 ## Frequency parameter selection
 Freq_par_selector2 <- function(X, f_xx1 = NULL, fxx_evec_s){
+  library(astsa)
+  library(waveslim)
+
   n <- nrow(X)
   p <- ncol(X)
 
@@ -687,6 +705,8 @@ Freq_par_selector2 <- function(X, f_xx1 = NULL, fxx_evec_s){
 
 ## Sparsity parameter selection
 sparse_par_selector2 <- function(X, eta, nu=0){
+  library(astsa)
+  library(waveslim)
   ### sparsity selection second round
   n <- nrow(X)
 
@@ -781,6 +801,11 @@ sparse_par_selector2 <- function(X, eta, nu=0){
 
 LSDPC_fps_SOAP_PDd_fun <- function(n,p, f_xx, Pi, ds, lambda, lr = 0.02, maxiter = 60,
                                    control = list(fan_maxinc = 10, verbose = 0), eta, s, n_iter, nu) {
+
+  library(fps)  # The modified version
+  library(RSpectra)
+  library(lpSolve)
+
   len_freq <- n/2
 
   S <- array(0, c(p*2, p*2, len_freq))
@@ -893,6 +918,9 @@ LSDPC_fps_SOAP_PDd_fun <- function(n,p, f_xx, Pi, ds, lambda, lr = 0.02, maxiter
 
 ## Frequency parameter selection
 Freq_par_selector_d <- function(X, f_xx1 = NULL, fxx_evec_s, ds){
+  library(astsa)
+  library(waveslim)
+
   n <- nrow(X)
   p <- ncol(X)
 
@@ -988,6 +1016,8 @@ Freq_par_selector_d <- function(X, f_xx1 = NULL, fxx_evec_s, ds){
 
 ## Sparsity parameter selection
 sparse_par_selector_d <- function(X, eta, nu=0, ds){
+  library(astsa)
+  library(waveslim)
   ### sparsity selection second round
   n <- nrow(X)
 
@@ -1101,7 +1131,7 @@ sparse_par_selector_d <- function(X, eta, nu=0, ds){
 #######################################################################################################################
 
 selector0 <- function(fxx_grad_evec, f_xx, len_freq ,eta,p){
-
+  library(lpSolve)
   ## optimization step
   # Coefficients of the linear objective function
   C <- sapply(1:len_freq, function(ell) Re(t(Conj(fxx_grad_evec[,ell]))%*%f_xx[,,ell]%*%fxx_grad_evec[,ell]))
