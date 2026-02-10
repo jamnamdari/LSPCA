@@ -10,6 +10,6 @@ Encoding: UTF-8
 LazyData: true
 Depends: 
     R (>= 2.10)
-Imports: RSpectra, fps, lpSolve, astsa, waveslim
+Imports: RSpectra, fps, lpSolve, astsa, waveslim, mvtnorm, complexplus, dplR
 Remotes: github::vqv/fps
 devtools::load_all() 
