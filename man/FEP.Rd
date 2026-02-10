@@ -28,20 +28,15 @@ The dataframe contains 64 chanell EEG recording of a Healthy Control subject.
 }
 \examples{
 
-library(astsa)
-library(waveslim)
-library(ggplot2)
-library(RSpectra)
-library(gradfps)
-library(lpSolve)
-
-
 ## Localized and sparse PCA
 
 LSPCA_FEP <- LSPCA(FEP, d=2, eta=41, s=8, n_iter = 20, theta=0.2)
 
 
 ## Plot
+library(ggplot2)
+library(latex2exp)
+
 
 xlab <- "Hz"
 ylab <- "Coordinate"

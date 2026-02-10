@@ -79,12 +79,6 @@ Jamshid Namdari
 }
 \examples{
 
-  library(dplR)
-  library(mvtnorm)
-  library(dplR)
-  library(waveslim)
-  library(astsa)
-
   ##########################################################################################
   ## Example 1 : This example reproduces bottom right panel of Figure 2 in the manuscript
   ##########################################################################################
@@ -99,40 +93,43 @@ Jamshid Namdari
 
 
 
-## Plot
-library(latex2exp)
+  ###########################
+  ## Plot
+  ###########################
+  library(ggplot2)
+  library(latex2exp)
 
-xlab <- "Hz"
-ylab <- "Coordinate"
-legend_title = ""
-asp = .5 #0.2
-bar_height = 10/2
-font_size = 20/2
+  xlab <- "Hz"
+  ylab <- "Coordinate"
+  legend_title = ""
+  asp = .5 #0.2
+  bar_height = 10/2
+  font_size = 20/2
 
 
 
-freq_s <- LSDPCA_Ex1$selected_freqs
-freq_selector <- matrix(rep(freq_s, p), nrow = p, byrow = TRUE)
-evecs <- t(freq_selector*Mod(LSDPCA_Ex1$Evec_series_1))
-v = as.matrix(evecs)
-lo = min(v)
-hi = max(v)
-r = max(abs(c(lo, hi)))
-gdat = data.frame(x = as.integer(row(v)), y = as.integer(col(v)),
+  freq_s <- LSDPCA_Ex1$selected_freqs
+  freq_selector <- matrix(rep(freq_s, p), nrow = p, byrow = TRUE)
+  evecs <- t(freq_selector*Mod(LSDPCA_Ex1$Evec_series_1))
+  v = as.matrix(evecs)
+  lo = min(v)
+  hi = max(v)
+  r = max(abs(c(lo, hi)))
+  gdat = data.frame(x = as.integer(row(v)), y = as.integer(col(v)),
                   z = as.numeric(v))
-ngrid = 1001
-pal = c("#67000d", "#a50f15", "#cb181d", "#ef3b2c", "#fb6a4a",
-        "#fc9272", "#fcbba1", "#fee0d2", "#ffffff", "#deebf7",
-        "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5",
-        "#08519c", "#08306b")
-col_pal = colorRampPalette(pal)(ngrid)
-col_val = seq(-r, r, length.out = ngrid)
-lo_ind = findInterval(lo, col_val)
-hi_ind = findInterval(hi, col_val)
-colors = col_pal[lo_ind:hi_ind]
+  ngrid = 1001
+  pal = c("#67000d", "#a50f15", "#cb181d", "#ef3b2c", "#fb6a4a",
+          "#fc9272", "#fcbba1", "#fee0d2", "#ffffff", "#deebf7",
+          "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5",
+          "#08519c", "#08306b")
+  col_pal = colorRampPalette(pal)(ngrid)
+  col_val = seq(-r, r, length.out = ngrid)
+  lo_ind = findInterval(lo, col_val)
+  hi_ind = findInterval(hi, col_val)
+  colors = col_pal[lo_ind:hi_ind]
 
-ggplot(gdat, aes(x = x, y = y, fill = z)) + geom_tile() +
-  scale_x_continuous(xlab, expand = c(0, 0)) + scale_y_reverse(ylab,
+  ggplot(gdat, aes(x = x, y = y, fill = z)) + geom_tile() +
+    scale_x_continuous(xlab, expand = c(0, 0)) + scale_y_reverse(ylab,
                                                                breaks = 1:ncol(v), expand = c(0, 0)) + scale_fill_gradientn(legend_title,
                                                                                                                             colors = colors, limits = c(0, 1)) + guides(fill = guide_colorbar(barheight = bar_height)) +
   theme_bw(base_size = font_size) + theme(aspect.ratio = asp) + labs(title = TeX("$\\theta=0.6$")) +
