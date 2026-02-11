@@ -307,6 +307,8 @@ You can use the following code to reproduce the top panels of Figure 5 of the ma
 
 ### Principal Subspace Estimation
 
+First we apply the LSPCA algorithm.
+
 ```r
 ## Localized and sparse PCA
 HC_LSPCA <- LSPCA(HC, d=2, eta=52, s=8, n_iter = 20, theta=0.6)
@@ -413,7 +415,7 @@ You can use the following code to reproduce the bottom panels of Figure 5 of the
 
 ### Principal Subspace Estimation
 
-Next we apply the LSPCA algorithm.
+First we apply the LSPCA algorithm.
 
 ```r
 ## Localized and sparse PCA
@@ -423,7 +425,7 @@ FEP_LSPCA <- LSPCA(FEP, d=2, eta=41, s=8, n_iter = 20, theta=0.2)
 
 ### Plots
 
-Finally, the bottom left panel of Figure 5 of the main manuscript can be reproduced by the following code.
+The bottom left panel of Figure 5 of the main manuscript can be reproduced by the following code.
 
 ```r
 ## Plot
