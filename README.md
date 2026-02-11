@@ -211,7 +211,7 @@ ggplot(gdat, aes(x = x, y = y, fill = z)) + geom_tile() +
 
 ### Top Right Panel of Figure 2
 
-To run this code, you would first need to run the code provided in the <a href="./Help_files/Data_Generation.md">data generation file</a>.
+To run this code, you would first need to run the code provided in the <a href="./Help_files/Data_Generation.md">data generation file</a>, if not run previously.
 
 ```r
 ## Classic
