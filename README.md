@@ -16,6 +16,15 @@ library(remotes)
 remotes::install_github("jamnamdari/LSPCA@Windows-only")
 ```
 
+## Dependencies
+
+We suggest to loading latex2exp and ggplot2 before conducting the analyses. It will be used for creating figures.
+
+``` r
+library(latex2exp)
+library(ggplot2)
+```
+
 ## Example
 The dataframe `D` included in the R package `LSPCA` contains a realization of the 64 dimensional time series at times `t = 1, ..., 1024`. Detailed instruction on how to generate the samples are privided in the <a href="./Help_files/Data_Generation.md">data generation file</a>.
 
