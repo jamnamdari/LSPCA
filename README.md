@@ -312,6 +312,8 @@ Ex4 <- LSPCA.f(n,p,f_D, d=1, eta=(2/5)*512, s=5, n_iter = 20, theta=0.6)
 
 ## HC
 
+The dataframe `HC` provide in the package contains 64 chanell EEG recording of a Healthy Control subject collected as part of an NIH funded study (R01MH113827)). Data wwere collected while the participant sat in a chair and relaxed with their eyes open. The data are sampled at 4 Hz for one minutes.
+
 You can use the following code to reproduce the top panels of Figure 5 of the main manuscript.
 
 ### Principal Subspace Estimation
@@ -420,6 +422,8 @@ ggplot(gdat, aes(x = x, y = y, fill = z)) + geom_tile() +
 <img src="./LSPCA_images/HC_pc2.jpeg" alt="" width="600px">
 
 ## FEP
+
+The dataframe `FEP` provide in the package contains 64 chanell EEG recording of a First Epesode Psychotic subject collected as part of an NIH funded study (R01MH113827)). Data wwere collected while the participant sat in a chair and relaxed with their eyes open. The data are sampled at 4 Hz for one minutes.
 
 You can use the following code to reproduce the bottom panels of Figure 5 of the main manuscript.
 
