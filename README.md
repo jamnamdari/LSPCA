@@ -49,7 +49,7 @@ We estimate the leading principal subspace of the underlying spectral density ma
 ##################################################
 ## Estimate of 1-dimensional principal subspaces
 ##################################################
-
+library(lspca)
 ## Without smoothing
 Ex1 <- LSPCA(D, d=1, eta=(2/5)*512, s=5, n_iter = 20, theta=0, ntp=20)
 
@@ -294,7 +294,7 @@ The `LSPCA.f` function estimates the localized and sparse principal components o
 ##################################################
 ## Estimate of 1-dimensional principal subspaces
 ##################################################
-
+library(lspca)
 p <- ncol(D)
 n <- nrow(D)
 
@@ -320,6 +320,7 @@ First we apply the LSPCA algorithm.
 
 ```r
 ## Localized and sparse PCA
+library(lspca)
 HC_LSPCA <- LSPCA(HC, d=2, eta=52, s=8, n_iter = 20, theta=0.6)
 ```
 
@@ -428,7 +429,7 @@ First we apply the LSPCA algorithm.
 
 ```r
 ## Localized and sparse PCA
-
+library(lspca)
 FEP_LSPCA <- LSPCA(FEP, d=2, eta=41, s=8, n_iter = 20, theta=0.2)
 ```
 
