@@ -66,8 +66,12 @@ D <- cbind(X_omega_2, X_wn)
 
 ## End of data generation ##
 ############################
+```
 
+## Population Spectral Density Matrices
+The R-code provided below produces the spectral density matrices of the process provided in the manuscript. 
 
+```r
 #############################################################################
 ## Below is the code to construct the population spectral density matrices
 ## Population Spectral Density Matrices
