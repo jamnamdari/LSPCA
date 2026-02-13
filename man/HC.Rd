@@ -7,7 +7,7 @@ EEG recording of a Healthy Control subject
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of the dataset. ~~
-The dataframe contains 64 chanell EEG recording of a Healthy Control subject collected as part of an NIH funded study (R01MH113827)). Data wwere collected while the participant sat in a chair and relaxed with their eyes open. The data are sampled at 64 Hz for one minutes.
+The dataframe contains 64 chanell EEG recording of a Healthy Control subject collected as part of an NIH funded study (R01MH113827)). Data were collected while the participant sat in a chair and relaxed with their eyes open. The data are sampled at 64 Hz for one minutes.
 }
 \format{
  A data frame with 1028 rows and 64 columns. Columns represent chanells and rows represent time points.
