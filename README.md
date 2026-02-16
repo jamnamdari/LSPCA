@@ -335,7 +335,8 @@ n <- nrow(HC)
 
 freq_s <- HC_LSPCA$selected_freqs
 freq_selector <- matrix(rep(freq_s, p), nrow = p, byrow = TRUE)
-evecs <- t(freq_selector*Mod(HC_LSPCA$Evec_series_1))v = as.matrix(evecs)
+evecs <- t(freq_selector*Mod(HC_LSPCA$Evec_series_1))
+v = as.matrix(evecs)
 lo = min(v)
 hi = max(v)
 r = max(abs(c(lo, hi)))
