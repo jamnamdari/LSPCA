@@ -71,9 +71,6 @@ Bottom Left panel of Figure 2 of the main manuscript can be reproduced by the fo
 ## Plots
 ###########################
 
-library(ggplot2)
-library(latex2exp)
-
 xlab <- "Hz"
 ylab <- "Coordinate"
 legend_title = ""
@@ -125,9 +122,6 @@ Bottom right panel of Figure 2 of the main manuscript can be reproduced by the f
 ## Plots
 ###########################
 
-library(ggplot2)
-library(latex2exp)
-
 xlab <- "Hz"
 ylab <- "Coordinate"
 legend_title = ""
@@ -177,9 +171,6 @@ To run this code, you would first need to run the code provided in the <a href="
 ```r
 ## Population
 
-library(ggplot2)
-library(latex2exp)
-
 xlab <- "Hz"
 ylab <- "Coordinate"
 legend_title = ""
@@ -224,9 +215,6 @@ To run this code, you would first need to run the code provided in the <a href="
 
 ```r
 ## Classic
-
-library(ggplot2)
-library(latex2exp)
 
 xlab <- "Hz"
 ylab <- "Coordinate"
@@ -335,9 +323,6 @@ The top left panel of Figure 5 of the main manuscript can be reproduced by the f
 ```r
 ## Plot
 
-library(ggplot2)
-library(latex2exp)
-
 xlab <- "Hz"
 ylab <- "Coordinate"
 legend_title = ""
@@ -348,9 +333,9 @@ font_size = 20/2
 p <- ncol(HC)
 n <- nrow(HC)
 
-Localized_Est <- selector(HC_LSPCA[[1]],f_xx1,n/2,52,p)
-evecs <- t(Mod(Localized_Est[[1]]))
-v = as.matrix(evecs)
+freq_s <- HC_LSPCA$selected_freqs
+freq_selector <- matrix(rep(freq_s, p), nrow = p, byrow = TRUE)
+evecs <- t(freq_selector*Mod(HC_LSPCA$Evec_series_1))v = as.matrix(evecs)
 lo = min(v)
 hi = max(v)
 r = max(abs(c(lo, hi)))
@@ -444,9 +429,6 @@ The bottom left panel of Figure 5 of the main manuscript can be reproduced by th
 ```r
 ## Plot
 
-library(ggplot2)
-library(latex2exp)
-
 xlab <- "Hz"
 ylab <- "Coordinate"
 legend_title = ""
@@ -457,8 +439,9 @@ font_size = 20/2
 p <- ncol(FEP)
 n <- nrow(FEP)
 
-Localized_Est <- selector(FEP_LSPCA[[1]],f_xx1,n/2,41,p)
-evecs <- t(Mod(Localized_Est[[1]]))
+freq_s <- FEP_LSPCA$selected_freqs
+freq_selector <- matrix(rep(freq_s, p), nrow = p, byrow = TRUE)
+evecs <- t(freq_selector*Mod(FEP_LSPCA$Evec_series_1))
 v = as.matrix(evecs)
 lo = min(v)
 hi = max(v)
